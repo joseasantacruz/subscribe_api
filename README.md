@@ -1,24 +1,46 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# subscribe_api #
+This is a Ruby API to solve Code Challenge to [Subscribe](https://subscribeplatform.com/)
 
-Things you may want to cover:
+[Requirements](https://gist.github.com/safplatform/792314da6b54346594432f30d5868f36)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Deployment
+### Install
+- Ruby
+```sh
+rvm install ruby
+```
+- Rails
+```sh
+gem install rails
+```
+- Cors
+```sh
+gem install rack-cors -v 0.4.0
+```
+- Clone this repo:
+```sh
+git clone git@github.com:joseasantacruz/subscribe_api.git
+```
+- bundle install
+```sh
+cd subscribe_api
+bundle install
+```
+- create db
+```sh
+rake db:setup
+```
+- migrate db
+```sh
+rails db:migrate
+``` 
+- seed data
+```sh
+rails db:seed
+``` 
+### Run server
+```sh
+rails s
+``` 
