@@ -4,10 +4,12 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products = Product.all
+    render json: @products.as_json(except: [:created_at, :updated_at])
   end
 
   # GET /products/1 or /products/1.json
   def show
+    render json: set_product.as_json(except: [:id, :created_at, :updated_at])
   end
 
   # GET /products/new
@@ -21,16 +23,15 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
-    @product = Product.new(product_params)
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+    @product = Product.create(
+      name: params[:name],
+      is_imported: params[:is_imported],
+      tax: params[:tax]
+    )
+    if @product.save
+      render json: @product.as_json(except: [:created_at, :updated_at])
+    else
+      format.json { render json: @product.errors, status: :unprocessable_entity }
     end
   end
 
@@ -49,12 +50,10 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1 or /products/1.json
   def destroy
+    @products = Product.all
+    @product = Product.find(params[:id])
     @product.destroy
-
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    render json: @products.as_json(except: [:created_at, :updated_at])
   end
 
   private

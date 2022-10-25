@@ -4,6 +4,7 @@ class PurchasesController < ApplicationController
   # GET /purchases or /purchases.json
   def index
     @purchases = Purchase.all
+    render json: @purchases, include: { purchase_details: { only: [:count, :price, :tax],include: { product: { only: [:name, :is_imported, :tax] } } } }, except: %i[created_at updated_at]
   end
 
   # GET /purchases/1 or /purchases/1.json
@@ -21,16 +22,28 @@ class PurchasesController < ApplicationController
 
   # POST /purchases or /purchases.json
   def create
-    @purchase = Purchase.new(purchase_params)
-
-    respond_to do |format|
-      if @purchase.save
-        format.html { redirect_to purchase_url(@purchase), notice: "Purchase was successfully created." }
-        format.json { render :show, status: :created, location: @purchase }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @purchase.errors, status: :unprocessable_entity }
-      end
+    @purchase = Purchase.create()
+    @taxes = 0
+    @total = 0
+    params[:purchase_details].each do |details|
+      @product = Product.find_by(name: details[:product_name], is_imported: details[:is_imported])
+      @tax = ((@product.tax * details[:price] / 100)*20).round / 20.0
+      @tax = (@tax * details[:count])
+      @price = ((details[:price] * details[:count]) + @tax).round(2)
+      @purchase_detail = PurchaseDetail.create(
+        product: @product,
+        purchase: @purchase,
+        count: details[:count],
+        price: @price
+      )
+      @taxes += @tax
+      @total += @price
+    end
+    @purchase.update!(sales_tax: @taxes, total: (@total).round(2))
+    if @purchase.save
+      render json: @purchase.as_json(except: [:created_at, :updated_at])
+    else
+      format.json { render json: @purchase.errors, status: :unprocessable_entity }
     end
   end
 
@@ -49,12 +62,10 @@ class PurchasesController < ApplicationController
 
   # DELETE /purchases/1 or /purchases/1.json
   def destroy
+    @purchases = Purchase.all
+    @purchase = Purchase.find(params[:id])
     @purchase.destroy
-
-    respond_to do |format|
-      format.html { redirect_to purchases_url, notice: "Purchase was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    render json: @purchases.as_json(except: [:created_at, :updated_at])
   end
 
   private

@@ -4,6 +4,7 @@ class PurchaseDetailsController < ApplicationController
   # GET /purchase_details or /purchase_details.json
   def index
     @purchase_details = PurchaseDetail.all
+    render json: @purchase_details, include: { product: { only: [:name, :is_imported, :tax] } }, except: %i[created_at updated_at product_id]
   end
 
   # GET /purchase_details/1 or /purchase_details/1.json
