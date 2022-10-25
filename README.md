@@ -56,3 +56,5 @@ rails db:seed
 ```sh
 rails s
 ``` 
+### Test
+This repo includes a JSON file that must be imported into postman(Subscribe API.postman_collection.json). 
