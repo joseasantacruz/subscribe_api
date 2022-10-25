@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_25_155706) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_162956) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.boolean "is_imported"
@@ -19,4 +19,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_155706) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "purchase_details", force: :cascade do |t|
+    t.integer "count"
+    t.float "price"
+    t.integer "purchase_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_purchase_details_on_product_id"
+    t.index ["purchase_id"], name: "index_purchase_details_on_purchase_id"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.float "sales_tax"
+    t.float "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "purchase_details", "products"
+  add_foreign_key "purchase_details", "purchases"
 end
