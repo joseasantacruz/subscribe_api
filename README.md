@@ -27,10 +27,6 @@ rvm install ruby
 ```sh
 gem install rails
 ```
-- Cors
-```sh
-gem install rack-cors -v 0.4.0
-```
 - Clone this repo:
 ```sh
 git clone git@github.com:joseasantacruz/subscribe_api.git
