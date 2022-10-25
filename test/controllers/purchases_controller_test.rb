@@ -3,6 +3,7 @@ require "test_helper"
 class PurchasesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @purchase = purchases(:one)
+    @purchase_detail = purchase_details(:one)
   end
 
   test "should get index" do
@@ -15,14 +16,6 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create purchase" do
-    assert_difference("Purchase.count") do
-      post purchases_url, params: { purchase: { sales_tax: @purchase.sales_tax, total: @purchase.total } }
-    end
-
-    assert_redirected_to purchase_url(Purchase.last)
-  end
-
   test "should show purchase" do
     get purchase_url(@purchase)
     assert_response :success
@@ -31,18 +24,5 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
   test "should get edit" do
     get edit_purchase_url(@purchase)
     assert_response :success
-  end
-
-  test "should update purchase" do
-    patch purchase_url(@purchase), params: { purchase: { sales_tax: @purchase.sales_tax, total: @purchase.total } }
-    assert_redirected_to purchase_url(@purchase)
-  end
-
-  test "should destroy purchase" do
-    assert_difference("Purchase.count", -1) do
-      delete purchase_url(@purchase)
-    end
-
-    assert_redirected_to purchases_url
   end
 end

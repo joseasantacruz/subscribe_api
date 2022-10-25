@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "d022d623-0818-4099-b622-f9986fee5d3c",
+		"name": "Subscribe API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12008523"
+	},
+	"item": [
+		{
+			"name": "get all products",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/products",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"book\",\n    \"is_imported\": true,\n    \"tax\": 15\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/products",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "book",
+							"disabled": true
+						},
+						{
+							"key": "is_imported",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "tax",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update products",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"book\",\n    \"is_imported\": true,\n    \"tax\": 16\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/products/15",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"15"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "book",
+							"disabled": true
+						},
+						{
+							"key": "is_imported",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "tax",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete product",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/products/21",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"21"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create purchase",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sales_tax\": 10,\n    \"total\": 1000\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/purchases",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"purchases"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "book",
+							"disabled": true
+						},
+						{
+							"key": "is_imported",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "tax",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all purchases",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/purchases",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"purchases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete purchases",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/purchases/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"purchases",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get product",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/products/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all purchase_details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/purchase_details",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"purchase_details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Input 1",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"purchase_details\": [{\n        \"count\": 2,\n        \"product_name\": \"book\",\n        \"is_imported\": false,\n        \"price\": 12.49\n    },{\n        \"count\": 1,\n        \"product_name\": \"music CD\",\n        \"is_imported\": false,\n        \"price\": 14.99\n    },{\n        \"count\": 1,\n        \"product_name\": \"chocolate bar\",\n        \"is_imported\": false,\n        \"price\": 0.85\n    }]\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/purchases",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"purchases"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "book",
+							"disabled": true
+						},
+						{
+							"key": "is_imported",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "tax",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Input 2",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"purchase_details\": [{\n        \"count\": 1,\n        \"product_name\": \"box of chocolates\",\n        \"is_imported\": true,\n        \"price\": 10\n    },{\n        \"count\": 1,\n        \"product_name\": \"bottle of perfume\",\n        \"is_imported\": true,\n        \"price\": 47.50\n    }]\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/purchases",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"purchases"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "book",
+							"disabled": true
+						},
+						{
+							"key": "is_imported",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "tax",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Input 3",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"purchase_details\": [{\n        \"count\": 1,\n        \"product_name\": \"bottle of perfume\",\n        \"is_imported\": true,\n        \"price\": 27.99\n    },{\n        \"count\": 1,\n        \"product_name\": \"bottle of perfume\",\n        \"is_imported\": false,\n        \"price\": 18.99\n    },{\n        \"count\": 1,\n        \"product_name\": \"packet of headache pills\",\n        \"is_imported\": false,\n        \"price\": 9.75\n    }    ,{\n        \"count\": 3,\n        \"product_name\": \"box of chocolates\",\n        \"is_imported\": true,\n        \"price\": 11.25\n    }]\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/purchases",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"purchases"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "book",
+							"disabled": true
+						},
+						{
+							"key": "is_imported",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "tax",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

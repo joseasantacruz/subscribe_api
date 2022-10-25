@@ -4,7 +4,7 @@ class PurchasesController < ApplicationController
   # GET /purchases or /purchases.json
   def index
     @purchases = Purchase.all
-    render json: @purchases, include: { purchase_details: { only: [:count, :price, :tax],include: { product: { only: [:name, :is_imported, :tax] } } } }, except: %i[created_at updated_at]
+    render json: @purchases, include: { purchase_details: { only: %i[count price tax],include: { product: { only: %i[name is_imported tax] } } } }, except: %i[created_at updated_at]
   end
 
   # GET /purchases/1 or /purchases/1.json
@@ -27,7 +27,7 @@ class PurchasesController < ApplicationController
     @total = 0
     params[:purchase_details].each do |details|
       @product = Product.find_by(name: details[:product_name], is_imported: details[:is_imported])
-      @tax = ((@product.tax * details[:price] / 100)*20).round / 20.0
+      @tax = (((@product.tax * details[:price]).to_f / 100)*20).round / 20.0
       @tax = (@tax * details[:count])
       @price = ((details[:price] * details[:count]) + @tax).round(2)
       @purchase_detail = PurchaseDetail.create(
@@ -41,7 +41,7 @@ class PurchasesController < ApplicationController
     end
     @purchase.update!(sales_tax: @taxes, total: (@total).round(2))
     if @purchase.save
-      render json: @purchase.as_json(except: [:created_at, :updated_at])
+      render json: @purchase, include: { purchase_details: { only: %i[count price tax],include: { product: { only: %i[name is_imported tax] } } } }, except: %i[id created_at updated_at]
     else
       format.json { render json: @purchase.errors, status: :unprocessable_entity }
     end
@@ -65,7 +65,7 @@ class PurchasesController < ApplicationController
     @purchases = Purchase.all
     @purchase = Purchase.find(params[:id])
     @purchase.destroy
-    render json: @purchases.as_json(except: [:created_at, :updated_at])
+    render json: @purchases.as_json(except: %i[created_at updated_at])
   end
 
   private

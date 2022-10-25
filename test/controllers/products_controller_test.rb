@@ -19,8 +19,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Product.count") do
       post products_url, params: { product: { is_imported: @product.is_imported, name: @product.name, tax: @product.tax } }
     end
-
-    assert_redirected_to product_url(Product.last)
   end
 
   test "should show product" do
@@ -36,13 +34,5 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "should update product" do
     patch product_url(@product), params: { product: { is_imported: @product.is_imported, name: @product.name, tax: @product.tax } }
     assert_redirected_to product_url(@product)
-  end
-
-  test "should destroy product" do
-    assert_difference("Product.count", -1) do
-      delete product_url(@product)
-    end
-
-    assert_redirected_to products_url
   end
 end
